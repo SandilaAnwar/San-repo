@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="card-container"></div>
+    
+    
+    
+    
+    
+    
+    
+    <!-- <script src="./script.js"></script>
+     -->
+     <script>
+    
+     const products = [
+    {   
+        id: 1 ,
+        name: "Product no 01",
+        description: "High-quality product with modern features.",
+        price: 29.99,
+        constcurrency: "USD",
+        inStock: true,
+        category: "Electronics",
+        tags: [ "gadget", "tech", "new"],
+                createdAt:
+        "2025-05-15T12:30:00Z",
+               updatedAt:
+          "2025-05-15T12:30:00Z"
+        },
+          {
+            id: 2,
+            name: "Product no 02",
+            description: "Durable and affordable item for everyday use.",
+            price: 15.50,
+            currency: "USD", 
+            inStock: false,
+            category: "Home and kitchen",
+            tags: ["kitchen", "daily-use"],
+                  
+                  createdAt:
+            "2025-05-15T12:30:00Z",
+                  updatedAt:
+            "2025-05-15T12:30:00Z"
+        }
+        ];
+
+
+        const container = document.getElementsByClassName("card-container")[0];
+        
+        products.map(product => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `<h2>${ product.name}</h2> <p><strong>ID:</strong> $ { product.id} </p> <p><strong>Description:</strong> ${ product.description}</p>
+                                <p><strong>Price</strong> $ {product.price} ${product.currency}</p>  <p><strong>category:</strong> ${ product.category}</p>
+                                <p><strong>In stock:</strong> $ { product.instock ?  "yes" "No"}</p>
+                                <p><strong>Tags:</strong> $ {product.tags.join (",")}</p>
+                                <p><strong>Created At:</strong> ${new Date(product.createdAt).toLocaleString()}</p>`;
+
+                                container.appendChild(card);
+        });
+
+
+         </script>
+
+      
+</body>
+</html> 
