@@ -1,74 +1,89 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <title>Student Grade Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .red {
+      color: red;
+    } 
+    .student-item {
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="card-container"></div>
-    
-    
-    
-    
-    
-    
-    
-    <!-- <script src="./script.js"></script>
-     -->
-     <script>
-    
-     const products = [
-    {   
-        id: 1 ,
-        name: "Product no 01",
-        description: "High-quality product with modern features.",
-        price: 29.99,
-        constcurrency: "USD",
-        inStock: true,
-        category: "Electronics",
-        tags: [ "gadget", "tech", "new"],
-                createdAt:
-        "2025-05-15T12:30:00Z",
-               updatedAt:
-          "2025-05-15T12:30:00Z"
-        },
-          {
-            id: 2,
-            name: "Product no 02",
-            description: "Durable and affordable item for everyday use.",
-            price: 15.50,
-            currency: "USD", 
-            inStock: false,
-            category: "Home and kitchen",
-            tags: ["kitchen", "daily-use"],
-                  
-                  createdAt:
-            "2025-05-15T12:30:00Z",
-                  updatedAt:
-            "2025-05-15T12:30:00Z"
-        }
-        ];
 
+  <h2>Student Grade Manager</h2>
 
-        const container = document.getElementsByClassName("card-container")[0];
-        
-        products.map(product => {
-            const card = document.createElement("div");
-            card.className = "card";
-            card.innerHTML = `<h2>${ product.name}</h2> <p><strong>ID:</strong> $ { product.id} </p> <p><strong>Description:</strong> ${ product.description}</p>
-                                <p><strong>Price</strong> $ {product.price} ${product.currency}</p>  <p><strong>category:</strong> ${ product.category}</p>
-                                <p><strong>In stock:</strong> $ { product.instock ?  "yes" "No"}</p>
-                                <p><strong>Tags:</strong> $ {product.tags.join (",")}</p>
-                                <p><strong>Created At:</strong> ${new Date(product.createdAt).toLocaleString()}</p>`;
+  <input type="text" id="studentName" placeholder="Enter student name">
+  <input type="number" id="studentMarks" placeholder="Enter marks">
+  <button onclick="addStudent()">Add Student</button>
 
-                                container.appendChild(card);
-        });
+  <h3>Student List:</h3>
+  <ul id="studentList"></ul>
 
+  <h3 id="averageScore">Average Score: 0</h3>
 
-         </script>
+  <script>
+    let students = [];
 
+    function addStudent() {
+      const name = document.getElementById('studentName').value.trim();
+      const marks = parseInt(document.getElementById('studentMarks').value.trim());
+
+      if (name === "" || isNaN(marks)) {
+        alert("Please enter valid name and marks");
+        return;
+      }
+
+      students.push({ name, marks });
+      updateList();
       
+      // Clear input fields
+      document.getElementById('studentName').value = "";
+      document.getElementById('studentMarks').value = "";
+    }
+
+    function deleteStudent(index) {
+      students.splice(index, 1);
+      updateList();
+    }
+
+    function updateList() {
+      const list = document.getElementById('studentList');
+      list.innerHTML = "";
+
+      let total = 0;
+
+      students.forEach((student, index) => {
+        total += student.marks;
+
+        const li = document.createElement('li');
+        li.className = 'student-item';
+
+        if (student.marks < 40) {
+          li.classList.add('red');
+        }
+
+        li.innerHTML = `${student.name} - ${student.marks} 
+          <button onclick="deleteStudent(${index})">Delete</button>`;
+
+        list.appendChild(li);
+      });
+
+      // Calculate and display average
+      const avg = students.length > 0 ? (total / students.length).toFixed(2) : 0;
+      document.getElementById('averageScore').innerText = `Average Score: ${avg}`;
+    }
+  </script>
+
 </body>
-</html> 
+</html>
+  
+
