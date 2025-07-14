@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Weight Checker (with DOM + console)</title>
+</head>
+<body>
+    
+  <h2>Simulated Fish Weight Check</h2>
+
+  <label>Enter Fish Weight (kg):</label>
+  <input type="number" id="weightInput"><br><br>
+
+  <label>Enter Minimum Weight (kg):</label>
+  <input type="number" id="minWeightInput"><br><br>
+
+  <button id="checkButton">Check Weight</button>
+
+  <h3 id="result"></h3>
+
+
+  <!-- <script src="script.js" ></script> -->
+
+  <script>
+    // Callback-based fish weight check function
+function checkFishWeight(weight, minWeight, callback) {
+  setTimeout(function () {
+    if (weight >= minWeight) {
+      callback("Pass");
+    } else {
+      callback("Fail");
+    }
+  }, 2000);
+}
+
+// Callback function that logs result to console and DOM
+function scoringCallback(result) {
+  // ✅ Console log
+  console.log("Result of check:", result);
+
+  // ✅ DOM display
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = "Result of check: " + result;
+  resultElement.style.color = result === "Pass" ? "green" : "red";
+}
+
+// Event listener for button
+document.getElementById("checkButton").addEventListener("click", function () {
+  const weight = parseFloat(document.getElementById("weightInput").value);
+  const minWeight = parseFloat(document.getElementById("minWeightInput").value);
+
+  if (isNaN(weight) || isNaN(minWeight)) {
+    alert("Please enter valid numbers.");
+    return;
+  }
+
+  // Optional waiting message
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = "Checking...";
+  resultElement.style.color = "black";
+
+  // Call the main function
+  checkFishWeight(weight, minWeight, scoringCallback);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
